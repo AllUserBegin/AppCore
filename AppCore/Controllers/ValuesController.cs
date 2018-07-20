@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppCore.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppCore.Controllers
@@ -9,11 +10,23 @@ namespace AppCore.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private IEnumerable<User> Users;
+        /// <summary>
+        /// 
+        /// </summary>
+        public ValuesController()
+        {
+            Users = new User[] {
+                new User() { Id=1,Name="book",Age=1},
+                new User() { Id=2,Name="asp.net core",Age=10},
+            };
+        }
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Produces("application/proto")]
+        public IEnumerable<User> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Users;
         }
 
         // GET api/values/5

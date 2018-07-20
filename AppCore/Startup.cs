@@ -28,6 +28,9 @@ namespace AppCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddMvc(option => {
+                option.OutputFormatters.Add(new ProtobufFormatter());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Hello", Version = "v1" });
